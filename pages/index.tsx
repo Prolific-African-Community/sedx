@@ -72,15 +72,15 @@ export default function SedxHome() {
 
     {/* Desktop Menu */}
     <div className="hidden lg:flex gap-10 text-sm font-semibold uppercase tracking-wider text-black">
-      <a href="#services" className="hover:text-red-600 transition">Services</a>
-      <a href="#modele" className="hover:text-red-600 transition">Contact</a>
-      <a href="#pourquoi" className="hover:text-red-600 transition">Partenaires</a>
+      <a href="#services" className="text-black text-sm no-underline hover:text-red-600 transition">Services</a>
+      <a href="#modele" className="text-black text-sm no-underline hover:text-red-600 transition">Contact</a>
+      <a href="#pourquoi" className="text-black text-sm no-underline hover:text-red-600 transition">Partenaires</a>
     </div>
 
     {/* Desktop CTA */}
     <a
       href="#contact"
-      className="hidden lg:inline-flex bg-red-600 hover:bg-red-700 rounded-full transition px-6 py-3 text-sm font-semibold text-white"
+      className="hidden lg:inline-flex bg-red-600 hover:bg-red-700 rounded-full transition px-6 py-3 text-sm no-underline font-semibold text-white"
     >
       Louer un espace
     </a>
@@ -109,39 +109,55 @@ export default function SedxHome() {
   </nav>
 
   {/* MOBILE MENU — conditionnel pur (évite les bugs) */}
-  {menuOpen && (
-    <>
-      {/* Overlay */}
-      <div
-        className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40"
-        onClick={() => setMenuOpen(false)}
-      />
+ {menuOpen && (
+  <>
+    {/* Overlay */}
+    <div
+      className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40"
+      onClick={() => setMenuOpen(false)}
+    />
 
-      {/* Fullscreen Menu */}
-      <div className="fixed inset-0 bg-black text-white z-50 flex flex-col justify-center items-center gap-12 text-3xl font-semibold">
+    {/* Fullscreen Menu */}
+    <div className="fixed inset-0 bg-black text-white z-50">
 
-        <a href="#services" onClick={() => setMenuOpen(false)} className="hover:text-red-600 transition">
+      {/* Top bar */}
+      <div className="flex justify-between items-center px-6 py-6">
+        <img src="/logo-sedx2.png" alt="SED-X logo" className="h-10" />
+
+        <button
+          onClick={() => setMenuOpen(false)}
+          className="text-white text-3xl leading-none"
+        >
+          ×
+        </button>
+      </div>
+
+      {/* Menu Links */}
+      <div className="flex flex-col justify-center items-center h-[80%] gap-12 text-3xl font-semibold">
+
+        <a href="#services" onClick={() => setMenuOpen(false)} className="text-white no-underline hover:text-red-600 transition">
           Services
         </a>
 
-        <a href="#modele" onClick={() => setMenuOpen(false)} className="hover:text-red-600 transition">
+        <a href="#modele" onClick={() => setMenuOpen(false)} className="text-white no-underline hover:text-red-600 transition">
           Contact
         </a>
 
-        <a href="#pourquoi" onClick={() => setMenuOpen(false)} className="hover:text-red-600 transition">
+        <a href="#pourquoi" onClick={() => setMenuOpen(false)} className="text-white no-underline hover:text-red-600 transition">
           Partenaires
         </a>
 
         <a
           href="#contact"
           onClick={() => setMenuOpen(false)}
-          className="mt-10 bg-red-600 hover:bg-red-700 transition px-10 py-4 rounded-full text-lg"
+          className="mt-10 bg-red-600 hover:bg-red-700 transition px-10 py-4 rounded-full text-lg text-white no-underline"
         >
           Louer un espace
         </a>
       </div>
-    </>
-  )}
+    </div>
+  </>
+)}
 </header>
       
       {/* HERO AVEC SLIDER */}
@@ -203,13 +219,13 @@ export default function SedxHome() {
     <div className="mt-12 flex flex-col sm:flex-row justify-center gap-6">
       <a
         href="/reserver"
-        className="bg-red-600 text-white rounded-full hover:bg-red-700 transition px-8 py-4 font-semibold"
+        className="bg-red-600 text-white no-underline rounded-full hover:bg-red-700 transition px-8 py-4 font-semibold"
       >
         Louer un espace
       </a>
       <a
         href="#contact"
-        className="bg-black/70 text-white rounded-full hover:bg-white hover:text-black transition px-8 py-4 font-semibold"
+        className="bg-black/70 text-white no-underline rounded-full hover:bg-white hover:text-black transition px-8 py-4 font-semibold"
       >
         Devenir partenaire
       </a>
@@ -232,7 +248,7 @@ export default function SedxHome() {
       </div>
 
       <Link href="/reserver">
-        <a className="inline-flex items-center justify-center bg-black text-white rounded-full hover:bg-red-600 transition px-6 py-3 text-sm font-semibold w-full md:w-auto">
+        <a className="inline-flex items-center justify-center bg-black text-white rounded-full hover:bg-red-600 transition px-6 py-3 text-sm no-underline font-semibold w-full md:w-auto">
           Demander un devis rapide
         </a>
       </Link>
@@ -490,6 +506,7 @@ export default function SedxHome() {
     </main>
   );
 }
+
 
 
 
