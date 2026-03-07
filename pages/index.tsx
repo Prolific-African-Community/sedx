@@ -201,7 +201,7 @@ export default function SedxHome() {
         },
         {
           id: "import",
-          title: "Import / Export Véhicules",
+          title: "Import / Export",
           price: "À partir de 290€",
           img: "/hero-9.jpg",
           bullets: ["Réception et stockage sécurisé", "Inspection & contrôle qualité", "Préparation avant revente ou livraison"],
@@ -409,4 +409,5 @@ export default function SedxHome() {
     </main>
   );
 }
+
 
