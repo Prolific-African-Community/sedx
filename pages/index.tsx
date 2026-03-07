@@ -26,25 +26,36 @@ export default function SedxHome() {
   const [scrolled, setScrolled] = useState(false);
   const [slide, setSlide] = useState(0);
   const [scrollY, setScrollY] = useState(0);
+
+  // ✅ MENU STATE (à ajouter ici)
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
     onScroll();
+
+    const handleScrollY = () => setScrollY(window.scrollY);
+
     window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("scroll", () => setScrollY(window.scrollY), { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener("scroll", handleScrollY, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("scroll", handleScrollY);
+    };
   }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setSlide((prev) => (prev + 1) % HERO_SLIDES.length);
     }, 4000);
+
     return () => clearInterval(interval);
   }, []);
 
   return (
     <main className="bg-white text-black selection:bg-red-600 selection:text-white">
+      
 {/* HEADER */}
 <header
   className={cn(
@@ -66,6 +77,7 @@ export default function SedxHome() {
       <a href="#pourquoi" className="hover:text-red-600 transition">Partenaires</a>
     </div>
 
+    {/* Desktop CTA */}
     <a
       href="#contact"
       className="hidden lg:inline-flex bg-red-600 hover:bg-red-700 rounded-full transition px-6 py-3 text-sm font-semibold text-white"
@@ -73,9 +85,9 @@ export default function SedxHome() {
       Louer un espace
     </a>
 
-    {/* Burger Premium */}
+    {/* Burger */}
     <button
-      onClick={() => setMenuOpen(!menuOpen)}
+      onClick={() => setMenuOpen(prev => !prev)}
       className="lg:hidden relative w-8 h-8 flex items-center justify-center"
     >
       <span
@@ -96,45 +108,41 @@ export default function SedxHome() {
     </button>
   </nav>
 
-  {/* Overlay */}
-  <div
-    className={`fixed inset-0 bg-black/40 backdrop-blur-sm transition-opacity duration-300 ${
-      menuOpen ? "opacity-100 visible" : "opacity-0 invisible"
-    }`}
-    onClick={() => setMenuOpen(false)}
-  />
-
-  {/* Fullscreen Menu */}
-  <div
-    className={`fixed top-0 right-0 h-full w-full bg-black text-white transform transition-transform duration-500 ${
-      menuOpen ? "translate-x-0" : "translate-x-full"
-    }`}
-  >
-    <div className="flex flex-col justify-center items-center h-full gap-12 text-3xl font-semibold">
-
-      <a href="#services" onClick={() => setMenuOpen(false)} className="hover:text-red-600 transition">
-        Services
-      </a>
-
-      <a href="#modele" onClick={() => setMenuOpen(false)} className="hover:text-red-600 transition">
-        Contact
-      </a>
-
-      <a href="#pourquoi" onClick={() => setMenuOpen(false)} className="hover:text-red-600 transition">
-        Partenaires
-      </a>
-
-      <a
-        href="#contact"
+  {/* MOBILE MENU — conditionnel pur (évite les bugs) */}
+  {menuOpen && (
+    <>
+      {/* Overlay */}
+      <div
+        className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40"
         onClick={() => setMenuOpen(false)}
-        className="mt-10 bg-red-600 hover:bg-red-700 transition px-10 py-4 rounded-full text-lg"
-      >
-        Louer un espace
-      </a>
-    </div>
-  </div>
-</header>
+      />
 
+      {/* Fullscreen Menu */}
+      <div className="fixed inset-0 bg-black text-white z-50 flex flex-col justify-center items-center gap-12 text-3xl font-semibold">
+
+        <a href="#services" onClick={() => setMenuOpen(false)} className="hover:text-red-600 transition">
+          Services
+        </a>
+
+        <a href="#modele" onClick={() => setMenuOpen(false)} className="hover:text-red-600 transition">
+          Contact
+        </a>
+
+        <a href="#pourquoi" onClick={() => setMenuOpen(false)} className="hover:text-red-600 transition">
+          Partenaires
+        </a>
+
+        <a
+          href="#contact"
+          onClick={() => setMenuOpen(false)}
+          className="mt-10 bg-red-600 hover:bg-red-700 transition px-10 py-4 rounded-full text-lg"
+        >
+          Louer un espace
+        </a>
+      </div>
+    </>
+  )}
+</header>
       
       {/* HERO AVEC SLIDER */}
 <section className="relative min-h-screen flex items-center justify-center text-center overflow-hidden pt-28">
@@ -482,6 +490,7 @@ export default function SedxHome() {
     </main>
   );
 }
+
 
 
 
