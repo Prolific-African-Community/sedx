@@ -209,7 +209,7 @@ export default function SedxHome() {
       ].map((tag) => (
         <span
           key={tag}
-          className="px-5 py-2 text-sm bg-white/10 border border-white/30 rounded-full backdrop-blur"
+          className="px-5 py-2 text-sm bg-slate-700 border border-white/30 rounded-full backdrop-blur"
         >
           {tag}
         </span>
@@ -506,6 +506,7 @@ export default function SedxHome() {
     </main>
   );
 }
+
 
 
 
