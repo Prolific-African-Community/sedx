@@ -26,6 +26,7 @@ export default function SedxHome() {
   const [scrolled, setScrolled] = useState(false);
   const [slide, setSlide] = useState(0);
   const [scrollY, setScrollY] = useState(0);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -44,98 +45,170 @@ export default function SedxHome() {
 
   return (
     <main className="bg-white text-black selection:bg-red-600 selection:text-white">
-      {/* HEADER */}
-      <header
-        className={cn(
-          "fixed top-0 w-full z-50 transition-all",
-          scrolled
-            ? "bg-white/95 backdrop-blur border-b border-zinc-200"
-            : "bg-white"
-        )}
+{/* HEADER */}
+<header
+  className={cn(
+    "fixed top-0 w-full z-50 transition-all",
+    scrolled
+      ? "bg-white/95 backdrop-blur border-b border-zinc-200"
+      : "bg-white"
+  )}
+>
+  <nav className="max-w-8xl mx-auto px-6 py-6 flex justify-between items-center">
+
+    {/* Logo */}
+    <img src="/logo-sedx2.png" alt="SED-X logo" className="h-12 w-auto" />
+
+    {/* Desktop Menu */}
+    <div className="hidden lg:flex gap-10 text-sm font-semibold uppercase tracking-wider text-black">
+      <a href="#services" className="hover:text-red-600 transition">Services</a>
+      <a href="#modele" className="hover:text-red-600 transition">Contact</a>
+      <a href="#pourquoi" className="hover:text-red-600 transition">Partenaires</a>
+    </div>
+
+    <a
+      href="#contact"
+      className="hidden lg:inline-flex bg-red-600 hover:bg-red-700 rounded-full transition px-6 py-3 text-sm font-semibold text-white"
+    >
+      Louer un espace
+    </a>
+
+    {/* Burger Premium */}
+    <button
+      onClick={() => setMenuOpen(!menuOpen)}
+      className="lg:hidden relative w-8 h-8 flex items-center justify-center"
+    >
+      <span
+        className={`absolute h-0.5 w-6 bg-black transition-all duration-300 ${
+          menuOpen ? "rotate-45" : "-translate-y-2"
+        }`}
+      />
+      <span
+        className={`absolute h-0.5 w-6 bg-black transition-all duration-300 ${
+          menuOpen ? "opacity-0" : ""
+        }`}
+      />
+      <span
+        className={`absolute h-0.5 w-6 bg-black transition-all duration-300 ${
+          menuOpen ? "-rotate-45" : "translate-y-2"
+        }`}
+      />
+    </button>
+  </nav>
+
+  {/* Overlay */}
+  <div
+    className={`fixed inset-0 bg-black/40 backdrop-blur-sm transition-opacity duration-300 ${
+      menuOpen ? "opacity-100 visible" : "opacity-0 invisible"
+    }`}
+    onClick={() => setMenuOpen(false)}
+  />
+
+  {/* Fullscreen Menu */}
+  <div
+    className={`fixed top-0 right-0 h-full w-full bg-black text-white transform transition-transform duration-500 ${
+      menuOpen ? "translate-x-0" : "translate-x-full"
+    }`}
+  >
+    <div className="flex flex-col justify-center items-center h-full gap-12 text-3xl font-semibold">
+
+      <a href="#services" onClick={() => setMenuOpen(false)} className="hover:text-red-600 transition">
+        Services
+      </a>
+
+      <a href="#modele" onClick={() => setMenuOpen(false)} className="hover:text-red-600 transition">
+        Contact
+      </a>
+
+      <a href="#pourquoi" onClick={() => setMenuOpen(false)} className="hover:text-red-600 transition">
+        Partenaires
+      </a>
+
+      <a
+        href="#contact"
+        onClick={() => setMenuOpen(false)}
+        className="mt-10 bg-red-600 hover:bg-red-700 transition px-10 py-4 rounded-full text-lg"
       >
-        <nav className="max-w-8xl mx-auto px-6 py-6 flex justify-between items-center">
-          <img src="/logo-sedx2.png" alt="SED-X logo" className="h-12 w-auto" />
+        Louer un espace
+      </a>
+    </div>
+  </div>
+</header>
 
-          <div className="hidden lg:flex gap-10 text-sm text-semibold uppercase tracking-wider text-black">
-            <a href="#services" className="text-black text-sm no-underline hover:text-red-600 transition">Services</a>
-            <a href="#modele" className="text-black text-sm no-underline hover:text-red-600 transition">Contact</a>
-            <a href="#pourquoi" className="text-black text-sm no-underline hover:text-red-600 transition">Partenaires</a>
-          </div>
-
-          <a
-            href="#contact"
-            className="bg-red-600 no-underline hover:bg-red-700 rounded-full transition px-6 py-3 text-sm font-semibold text-white"
-          >
-            Louer un espace
-          </a>
-        </nav>
-      </header>
-
+      
       {/* HERO AVEC SLIDER */}
-      <section className="relative h-screen flex items-center justify-center text-center overflow-hidden">
-        {/* Images */}
-        {HERO_SLIDES.map((img, index) => (
-          <img
-            key={img}
-            src={img}
-            alt="SED-X infrastructure"
-            className={cn(
-              "absolute inset-0 w-full h-full object-fit transition-opacity duration-1000",
-              index === slide ? "opacity-100" : "opacity-0"
-            )}
-          />
-        ))}
+<section className="relative min-h-screen flex items-center justify-center text-center overflow-hidden pt-28">
+  
+  {/* Images */}
+  {HERO_SLIDES.map((img, index) => (
+    <img
+      key={img}
+      src={img}
+      alt="SED-X infrastructure"
+      className={cn(
+        "absolute inset-0 w-full h-full object-cover transition-opacity duration-1000",
+        index === slide ? "opacity-100" : "opacity-0"
+      )}
+    />
+  ))}
 
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-zinc-800/60" />
+  {/* Overlay */}
+  <div className="absolute inset-0 bg-black/60" />
 
-        {/* Content */}
-        <div
-          className="relative z-10 max-w-5xl pt-16 px-6 text-white transition-all duration-700 ease-out"
-          style={{
-            transform: `translateY(${scrollY * 0.25}px) scale(${1 - scrollY * 0.0003})`,
-            opacity: 1 - scrollY * 0.0015,
-          }}
+  {/* Content */}
+  <div
+    className="relative z-10 max-w-5xl px-6 text-white transition-all duration-700 ease-out"
+    style={{
+      transform: `translateY(${scrollY * 0.25}px)`,
+      opacity: 1 - scrollY * 0.0015,
+    }}
+  >
+    <h1 className="text-4xl md:text-6xl lg:text-7xl font-semibold leading-tight">
+      Zone Industrielle Sécurisée à Sedan.
+    </h1>
+
+    <p className="mt-8 text-lg md:text-xl text-zinc-200 max-w-3xl mx-auto">
+      Parking poids lourds 24/7, stockage véhicules et matériaux, 
+      ateliers et espaces logistiques disponibles immédiatement.
+    </p>
+
+    {/* Tags */}
+    <div className="mt-10 flex flex-wrap justify-center gap-4">
+      {[
+        "12 000 m²",
+        "Accès 24/7",
+        "Parking Camions",
+        "Stockage Véhicules",
+        "Ateliers & Boxes",
+        "Bornes Électriques",
+        "Frontière BE / LU",
+      ].map((tag) => (
+        <span
+          key={tag}
+          className="px-5 py-2 text-sm bg-white/10 border border-white/30 rounded-full backdrop-blur"
         >
-          <h1 className={TITLE}>
-            Zone Industrielle Sécurisée à Sedan.
-          </h1>
+          {tag}
+        </span>
+      ))}
+    </div>
 
-          <p className="mt-8 text-xl text-zinc-200">
-            Parking poids lourds 24/7, Stockage véhicules et matériaux, 
-            Ateliers et Espaces logistiques disponibles immédiatement.
-          </p>
-
-          {/* Tags descriptifs */}
-          <div className="mt-10 flex flex-wrap justify-center gap-4">
-            {["12 000 m²", "Accès 24/7", "Parking Camions", "Stockage Véhicules & Matériaux", 
-              "Ateliers & Boxes", "Bornes Électriques", "Frontière BE / LU"].map((tag) => (
-              <span
-                key={tag}
-                className="px-5 py-2 text-sm bg-slate-700 border border-white/40 rounded-full backdrop-blur"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-
-          <div className="mt-12 flex justify-center gap-6">
-            <a
-              href="/reserver"
-              className="bg-red-600 text-white rounded-full no-underline hover:bg-red-700 transition px-8 py-4 font-semibold"
-            >
-              Louer un espace
-            </a>
-            <a
-              href="#contact"
-              className="bg-black text-white rounded-full no-underline hover:bg-white hover:text-black transition px-8 py-4 font-semibold"
-            >
-              Devenir partenaire
-            </a>
-          </div>
-        </div>
-      </section>
-
+    <div className="mt-12 flex flex-col sm:flex-row justify-center gap-6">
+      <a
+        href="/reserver"
+        className="bg-red-600 text-white rounded-full hover:bg-red-700 transition px-8 py-4 font-semibold"
+      >
+        Louer un espace
+      </a>
+      <a
+        href="#contact"
+        className="bg-black/70 text-white rounded-full hover:bg-white hover:text-black transition px-8 py-4 font-semibold"
+      >
+        Devenir partenaire
+      </a>
+    </div>
+  </div>
+</section>
+      
      {/* SERVICES */}
 <section
   id="services"
@@ -409,5 +482,6 @@ export default function SedxHome() {
     </main>
   );
 }
+
 
 
