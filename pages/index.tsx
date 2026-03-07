@@ -200,6 +200,14 @@ export default function SedxHome() {
           cta: "Réserver",
         },
         {
+          id: "import",
+          title: "Import / Export Véhicules",
+          price: "À partir de 290€",
+          img: "/hero-9.jpg",
+          bullets: ["Réception et stockage sécurisé", "Inspection & contrôle qualité", "Préparation avant revente ou livraison"],
+          cta: "Réserver",
+        },
+        {
           id: "boutique",
           title: "La Boutique Smart",
           price: "Cashless",
@@ -401,3 +409,4 @@ export default function SedxHome() {
     </main>
   );
 }
+
