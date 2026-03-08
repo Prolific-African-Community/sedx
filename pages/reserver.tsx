@@ -131,32 +131,54 @@ export default function SedxReservationPage() {
   const buildWhatsAppMessage = () => {
     if (!selectedService) return "";
 
-    let details = "";
+    let detailsLines: string[] = [];
 
     switch (selectedService.id) {
       case "parking_pl":
-        details = `Plaque : ${plate}\nDurée : ${duration} jour(s)`;
+        detailsLines = [
+          `Plaque : ${plate}`,
+          `Durée : ${duration} jour(s)`
+        ];
         break;
       case "stockage_vehicule":
-        details = `Type véhicule : ${vehicleType}\nDurée : ${duration} mois`;
+        detailsLines = [
+          `Type véhicule : ${vehicleType}`,
+          `Durée : ${duration} mois`
+        ];
         break;
       case "stockage_materiel":
-        details = `Surface : ${surface} m²\nDurée : ${duration} mois`;
+        detailsLines = [
+          `Surface : ${surface} m²`,
+          `Durée : ${duration} mois`
+        ];
         break;
       case "atelier":
-        details = `Durée : ${duration} mois`;
+        detailsLines = [`Durée : ${duration} mois`];
         break;
       case "recharge":
-        details = `Nombre de sessions : ${quantity}`;
+        detailsLines = [`Nombre de sessions : ${quantity}`];
         break;
       case "logistique":
-        details = `Réception / Inspection véhicule`;
+        detailsLines = [`Réception / Inspection véhicule`];
         break;
       default:
-        details = "";
+        detailsLines = [];
     }
 
-    return `Nouvelle demande SED-X\n\nService : ${selectedService.title}\n${details}\n\nClient :\nNom / Société : ${company}\nEmail : ${email}\nTéléphone : ${phone}`;
+    const messageLines = [
+      "Nouvelle demande SED-X",
+      "",
+      `Service : ${selectedService.title}`,
+      ...detailsLines,
+      "",
+      "Client :",
+      `Nom / Société : ${company}`,
+      `Email : ${email}`,
+      `Téléphone : ${phone}`,
+    ];
+
+    return messageLines.join("
+").trim();
   };
 
   const handleWhatsApp = () => {
@@ -327,7 +349,7 @@ export default function SedxReservationPage() {
                 </div>
 
                 {estimatedPrice !== null && (
-                  <div className="flex justify-between mt-2 text-white">
+                  <div className="flex justify-between mt-2 text-zinc-300">
                     <span>Estimation indicative</span>
                     <strong>{estimatedPrice}€</strong>
                   </div>
@@ -339,7 +361,7 @@ export default function SedxReservationPage() {
                 onClick={handleWhatsApp}
                 className={`mt-8 w-full rounded-full py-4 font-semibold transition ${
                   isFormValid
-                    ? "bg-red-700 hover:bg-zinc-300"
+                    ? "bg-green-600 hover:bg-green-700"
                     : "bg-zinc-600 cursor-not-allowed"
                 }`}
               >
@@ -352,5 +374,3 @@ export default function SedxReservationPage() {
     </main>
   );
 }
-
-
