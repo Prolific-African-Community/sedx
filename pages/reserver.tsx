@@ -327,7 +327,7 @@ export default function SedxReservationPage() {
                 </div>
 
                 {estimatedPrice !== null && (
-                  <div className="flex justify-between mt-2 text-red-600">
+                  <div className="flex justify-between mt-2 text-white">
                     <span>Estimation indicative</span>
                     <strong>{estimatedPrice}€</strong>
                   </div>
@@ -339,7 +339,7 @@ export default function SedxReservationPage() {
                 onClick={handleWhatsApp}
                 className={`mt-8 w-full rounded-full py-4 font-semibold transition ${
                   isFormValid
-                    ? "bg-green-600 hover:bg-red-700"
+                    ? "bg-red-700 hover:bg-zinc-300"
                     : "bg-zinc-600 cursor-not-allowed"
                 }`}
               >
@@ -352,4 +352,5 @@ export default function SedxReservationPage() {
     </main>
   );
 }
+
 
