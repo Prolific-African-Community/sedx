@@ -177,8 +177,7 @@ export default function SedxReservationPage() {
       `Téléphone : ${phone}`,
     ];
 
-    return messageLines.join("
-").trim();
+    return messageLines.join("\n").trim();
   };
 
   const handleWhatsApp = () => {
