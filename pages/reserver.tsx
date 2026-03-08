@@ -65,8 +65,8 @@ const SERVICES: Service[] = [
   {
     id: "recharge",
     title: "Station de Recharge",
-    unit: "session",
-    basePrice: 5,
+    unit: "sur place",
+    basePrice: 0,
     description: "Bornes électriques accessibles 24/7.",
   },
   {
@@ -154,9 +154,6 @@ export default function SedxReservationPage() {
         break;
       case "atelier":
         detailsLines = [`Durée : ${duration} mois`];
-        break;
-      case "recharge":
-        detailsLines = [`Nombre de sessions : ${quantity}`];
         break;
       case "logistique":
         detailsLines = [`Réception / Inspection véhicule`];
@@ -360,7 +357,7 @@ export default function SedxReservationPage() {
                 onClick={handleWhatsApp}
                 className={`mt-8 w-full rounded-full py-4 font-semibold transition ${
                   isFormValid
-                    ? "bg-green-600 hover:bg-green-700"
+                    ? "bg-red-600 hover:bg-red-700"
                     : "bg-zinc-600 cursor-not-allowed"
                 }`}
               >
@@ -373,3 +370,4 @@ export default function SedxReservationPage() {
     </main>
   );
 }
+
