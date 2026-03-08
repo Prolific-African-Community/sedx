@@ -19,7 +19,7 @@ type Service = {
   id: ServiceType;
   title: string;
   unit: string;
-  basePrice: number; // 0 = sur devis
+  basePrice: number;
   description: string;
 };
 
@@ -57,10 +57,10 @@ const SERVICES: Service[] = [
   },
   {
     id: "logistique",
-    title: "Zone Import / Reconditionnement",
+    title: "Zone Import / Réception Véhicule",
     unit: "sur devis",
     basePrice: 0,
-    description: "Inspection, préparation VO.",
+    description: "Réception et contrôle qualité.",
   },
   {
     id: "recharge",
@@ -88,7 +88,6 @@ export default function SedxReservationPage() {
   const [quantity, setQuantity] = useState(1);
   const [duration, setDuration] = useState(1);
 
-  // Champs dynamiques
   const [plate, setPlate] = useState("");
   const [surface, setSurface] = useState(1);
   const [vehicleType, setVehicleType] = useState("");
@@ -118,14 +117,62 @@ export default function SedxReservationPage() {
     return selectedService.basePrice * quantity * duration;
   }, [selectedService, quantity, duration, surface]);
 
+  const isFormValid = useMemo(() => {
+    if (!selectedService) return false;
+    if (!company || !email) return false;
+
+    if (selectedService.id === "parking_pl" && !plate) return false;
+    if (selectedService.id === "stockage_vehicule" && !vehicleType)
+      return false;
+
+    return true;
+  }, [selectedService, company, email, plate, vehicleType]);
+
+  const buildWhatsAppMessage = () => {
+    if (!selectedService) return "";
+
+    let details = "";
+
+    switch (selectedService.id) {
+      case "parking_pl":
+        details = `Plaque : ${plate}\nDurée : ${duration} jour(s)`;
+        break;
+      case "stockage_vehicule":
+        details = `Type véhicule : ${vehicleType}\nDurée : ${duration} mois`;
+        break;
+      case "stockage_materiel":
+        details = `Surface : ${surface} m²\nDurée : ${duration} mois`;
+        break;
+      case "atelier":
+        details = `Durée : ${duration} mois`;
+        break;
+      case "recharge":
+        details = `Nombre de sessions : ${quantity}`;
+        break;
+      case "logistique":
+        details = `Réception / Inspection véhicule`;
+        break;
+      default:
+        details = "";
+    }
+
+    return `Nouvelle demande SED-X\n\nService : ${selectedService.title}\n${details}\n\nClient :\nNom / Société : ${company}\nEmail : ${email}\nTéléphone : ${phone}`;
+  };
+
+  const handleWhatsApp = () => {
+    const message = encodeURIComponent(buildWhatsAppMessage());
+    const phoneNumber = "352691280494";
+    window.open(`https://wa.me/${phoneNumber}?text=${message}`, "_blank");
+  };
+
   return (
     <main className="min-h-screen bg-white text-black px-6 py-20">
       <div className="max-w-6xl mx-auto">
         <h1 className="text-4xl md:text-5xl font-semibold tracking-tight">
-          Réservation SED-X
+          Demande de Réservation SED-X
         </h1>
         <p className="mt-4 text-zinc-600 max-w-2xl">
-          Réservez et payez en ligne en quelques minutes.
+          Sélectionnez votre service et envoyez votre demande directement via WhatsApp.
         </p>
 
         {/* Étape 1 */}
@@ -163,7 +210,6 @@ export default function SedxReservationPage() {
             {/* Étape 2 */}
             <section className="mt-16">
               <h2 className="text-2xl font-semibold">2. Paramètres</h2>
-
               <div className="mt-6 grid md:grid-cols-3 gap-6">
                 {selectedService.id === "parking_pl" && (
                   <>
@@ -250,7 +296,7 @@ export default function SedxReservationPage() {
 
             {/* Étape 3 */}
             <section className="mt-16 bg-zinc-900 text-white rounded-2xl p-10">
-              <h2 className="text-2xl font-semibold">3. Paiement & Informations</h2>
+              <h2 className="text-2xl font-semibold">3. Détails de votre demande</h2>
 
               <div className="mt-6 grid md:grid-cols-3 gap-6">
                 <input
@@ -280,20 +326,24 @@ export default function SedxReservationPage() {
                   <span>{selectedService.title}</span>
                 </div>
 
-                {estimatedPrice !== null ? (
-                  <div className="flex justify-between mt-2">
-                    <span>Total estimé</span>
-                    <strong className="text-red-500 text-xl">
-                      {estimatedPrice}€
-                    </strong>
+                {estimatedPrice !== null && (
+                  <div className="flex justify-between mt-2 text-zinc-300">
+                    <span>Estimation indicative</span>
+                    <strong>{estimatedPrice}€</strong>
                   </div>
-                ) : (
-                  <div className="mt-2 text-red-400">Sur devis</div>
                 )}
               </div>
 
-              <button className="mt-8 w-full bg-red-600 hover:bg-red-700 transition rounded-full py-4 font-semibold">
-                Payer & Confirmer (Stripe à connecter)
+              <button
+                disabled={!isFormValid}
+                onClick={handleWhatsApp}
+                className={`mt-8 w-full rounded-full py-4 font-semibold transition ${
+                  isFormValid
+                    ? "bg-green-600 hover:bg-green-700"
+                    : "bg-zinc-600 cursor-not-allowed"
+                }`}
+              >
+                Envoyer sur WhatsApp
               </button>
             </section>
           </>
