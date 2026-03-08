@@ -355,7 +355,7 @@ export default function SedxReservationPage() {
               <button
                 disabled={!isFormValid}
                 onClick={handleWhatsApp}
-                className={`mt-8 w-full rounded-full py-4 font-semibold transition ${
+                className={`mt-8 w-full rounded-full py-4 font-semibold text-white transition ${
                   isFormValid
                     ? "bg-red-600 hover:bg-red-700"
                     : "bg-zinc-600 cursor-not-allowed"
@@ -370,4 +370,5 @@ export default function SedxReservationPage() {
     </main>
   );
 }
+
 
