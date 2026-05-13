@@ -114,7 +114,7 @@ const [menuOpen, setMenuOpen] = useState(false);
   {menuOpen && (
     <div className="fixed inset-0 z-50 bg-white lg:hidden">
       <div className="flex items-center justify-between border-b border-zinc-200 px-6 py-5">
-        <img src="/logo-sedx2.png" alt="SED-X logo" className="h-10 w-auto" />
+        <img src="/logosedx.png" alt="SED-X logo" className="h-10 w-auto" />
 
         <button
           type="button"
@@ -139,7 +139,7 @@ const [menuOpen, setMenuOpen] = useState(false);
               key={item.label}
               href={item.href}
               onClick={() => setMenuOpen(false)}
-              className="border-b border-zinc-200 pb-5 text-4xl font-black uppercase tracking-tight text-black no-underline"
+              className="border-b border-zinc-200 pb-5 text-sm font-black uppercase tracking-tight text-black no-underline"
             >
               {item.label}
             </a>
@@ -159,8 +159,8 @@ const [menuOpen, setMenuOpen] = useState(false);
 </header>
 
 {/* HERO */}
-<section className="relative overflow-hidden bg-[#FAFAFA] pt-0">
-  <div className="relative mx-auto grid min-h-[calc(100vh-285px)] max-w-[1640px] grid-cols-1 items-center gap-4 px-6 pb-0 pt-6 lg:grid-cols-[0.82fr_1.18fr] lg:px-10 lg:pb-0 lg:pt-6">
+<section className="relative overflow-hidden bg-[#FAFAFA] pt-[96px] lg:pt-0">
+  <div className="relative mx-auto grid min-h-[calc(100vh-180px)] max-w-[1640px] grid-cols-1 items-center gap-4 px-6 pb-0 pt-4 lg:min-h-[calc(100vh-285px)] lg:grid-cols-[0.82fr_1.18fr] lg:px-10 lg:pt-6">
     {/* LEFT CONTENT */}
     <div
       className="relative z-20 max-w-4xl transition-all duration-700 ease-out"
@@ -216,7 +216,7 @@ const [menuOpen, setMenuOpen] = useState(false);
 
         <a
           href="#contact"
-          className="inline-flex w-fit border-b-2 border-red-600 pb-2 text-[11px] font-black uppercase tracking-[0.07em] text-black no-underline transition hover:text-red-600"
+          className="hidden sm:inline-flex w-fit border-b-2 border-red-600 pb-2 text-[11px] font-black uppercase tracking-[0.07em] text-black no-underline transition hover:text-red-600"
         >
           Parler à un expert
         </a>
@@ -1086,7 +1086,7 @@ const [menuOpen, setMenuOpen] = useState(false);
 
           <a
             href="#contact"
-            className="inline-flex w-fit border-b-2 border-red-600 pb-2 text-[12px] font-black uppercase tracking-[0.08em] text-black no-underline transition hover:text-red-600"
+            className="hidden sm:inline-flex w-fit border-b-2 border-red-600 pb-2 text-[12px] font-black uppercase tracking-[0.08em] text-black no-underline transition hover:text-red-600"
           >
             Parler à un expert
           </a>
@@ -1338,7 +1338,7 @@ const [menuOpen, setMenuOpen] = useState(false);
 
           <a
             href="#contact"
-            className="inline-flex w-fit border-b-2 border-red-600 pb-2 text-[12px] font-black uppercase tracking-[0.08em] text-black no-underline transition hover:text-red-600"
+            className="hidden sm:inline-flex w-fit border-b-2 border-red-600 pb-2 text-[12px] font-black uppercase tracking-[0.08em] text-black no-underline transition hover:text-red-600"
           >
             Demander un espace sur mesure
           </a>
