@@ -58,11 +58,11 @@ const [menuOpen, setMenuOpen] = useState(false);
     {/* Desktop Navigation */}
     <div className="hidden items-center gap-10 lg:flex">
       {[
-        { label: "Solutions", href: "#services" },
-        { label: "Avantages", href: "#avantages" },
-        { label: "Espaces", href: "#services" },
-        { label: "Sécurité", href: "#securite" },
-        { label: "À propos", href: "#partenaires" },
+        { label: "Stockage", href: "#services" },
+            { label: "Avantages", href: "#processus" },
+            { label: "Boxes & Ateliers", href: "#boxes-ateliers" },
+            { label: "Sécurité", href: "#securite" },
+            { label: "À propos", href: "#qui-sommes-nous" },
       ].map((item) => (
         <a
           key={item.label}
@@ -129,11 +129,11 @@ const [menuOpen, setMenuOpen] = useState(false);
       <div className="flex h-[calc(100vh-82px)] flex-col justify-between px-6 py-10">
         <div className="flex flex-col gap-7">
           {[
-            { label: "Solutions", href: "#services" },
-            { label: "Avantages", href: "#avantages" },
-            { label: "Espaces", href: "#services" },
+            { label: "Stockage", href: "#services" },
+            { label: "Avantages", href: "#processus" },
+            { label: "Boxes & Ateliers", href: "#boxes-ateliers" },
             { label: "Sécurité", href: "#securite" },
-            { label: "À propos", href: "#partenaires" },
+            { label: "À propos", href: "#qui-sommes-nous" },
           ].map((item) => (
             <a
               key={item.label}
@@ -208,7 +208,7 @@ const [menuOpen, setMenuOpen] = useState(false);
           href="#services"
           className="group inline-flex items-center justify-center gap-5 rounded-full bg-black px-8 py-4 text-[11px] font-black uppercase tracking-[0.07em] text-white no-underline shadow-[0_18px_45px_rgba(0,0,0,0.16)] transition hover:bg-red-600"
         >
-          Découvrir les solutions
+          Réserver un espace
           <span className="text-lg leading-none transition group-hover:translate-x-1">
             →
           </span>
@@ -741,7 +741,7 @@ const [menuOpen, setMenuOpen] = useState(false);
       </div>
 
       {/* Right image */}
-      <div className="relative hidden min-h-[560px] lg:block">
+      <div className="relative min-h-[560px] lg:block">
         <div className="absolute inset-0 overflow-hidden rounded-[76px]">
           <img
             src="/process-bg2.png"
@@ -1103,7 +1103,7 @@ const [menuOpen, setMenuOpen] = useState(false);
             Notre conviction
           </p>
 
-          <blockquote className="mt-6 max-w-3xl text-2xl font-black leading-tight tracking-[-0.035em] text-black md:text-4xl">
+          <blockquote className="mt-6 max-w-3xl text-xl font-black leading-tight tracking-[-0.035em] text-black md:text-4xl">
             “Le stockage ne doit pas être compliqué. L’espace, la sécurité et le
             transport doivent fonctionner ensemble.”
           </blockquote>
@@ -1345,27 +1345,25 @@ const [menuOpen, setMenuOpen] = useState(false);
         </div>
       </div>
 
-      {/* Right image */}
-      <div className="relative hidden min-h-[560px] lg:block">
-        <div className="absolute inset-0 overflow-hidden rounded-[76px]">
-          <img
-            src="/boxes-ateliers-bg2.png"
-            alt="Boxes et ateliers SED-X"
-            className="absolute inset-0 h-full w-full object-cover object-center grayscale"
-          />
+{/* Right image */}
+<div className="relative">
+  <div className="relative h-[320px] overflow-hidden rounded-[34px] bg-[#FAFAFA] sm:h-[420px] lg:h-[620px]">
+    <img
+      src="/boxes-ateliers-bg2.png"
+      alt="Boxes et ateliers SED-X"
+      className="absolute inset-0 h-full w-full scale-[1.12] object-contain object-center sm:scale-100 lg:object-cover"
+    />
 
-          {/* Premium fades */}
-          <div className="absolute inset-0 bg-[#FAFAFA]/10" />
-          <div className="absolute inset-y-0 left-0 w-[5%] bg-gradient-to-r from-[#FAFAFA] via-[#FAFAFA]/62 to-transparent" />
-          <div className="absolute inset-y-0 right-0 w-[5%] bg-gradient-to-l from-[#FAFAFA] via-[#FAFAFA]/62 to-transparent" />
-          <div className="absolute inset-x-0 top-0 h-[18%] bg-gradient-to-b from-[#FAFAFA] via-[#FAFAFA]/45 to-transparent" />
-          <div className="absolute inset-x-0 bottom-0 h-[26%] bg-gradient-to-t from-[#FAFAFA] via-[#FAFAFA]/70 to-transparent" />
-        </div>
-      </div>
+    <div className="pointer-events-none absolute inset-y-0 left-0 w-[14%] bg-gradient-to-r from-[#FAFAFA] to-transparent" />
+    <div className="pointer-events-none absolute inset-y-0 right-0 w-[14%] bg-gradient-to-l from-[#FAFAFA] to-transparent" />
+    <div className="pointer-events-none absolute inset-x-0 top-0 h-[10%] bg-gradient-to-b from-[#FAFAFA] to-transparent" />
+    <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[12%] bg-gradient-to-t from-[#FAFAFA] to-transparent" />
+  </div>
+</div>
     </div>
 
-    {/* CARDS */}
-    <div className="mt-20 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+{/* CARDS */}
+<div className="mt-8 grid gap-5 md:grid-cols-2 lg:mt-14 xl:grid-cols-4">
       {[
         {
           title: "Box privatif",
