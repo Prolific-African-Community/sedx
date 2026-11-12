@@ -161,7 +161,7 @@ export default function SedxReservationPage() {
   const handleWhatsApp = () => {
     if (!isFormValid) return;
 
-    const phoneNumber = "352691280494";
+    const phoneNumber = "33743741575";
     const message = encodeURIComponent(buildWhatsAppMessage());
 
     window.open(`https://wa.me/${phoneNumber}?text=${message}`, "_blank");

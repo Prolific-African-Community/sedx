@@ -429,7 +429,8 @@ const [menuOpen, setMenuOpen] = useState(false);
             id: "stockage_materiel",
             title: "Stockage materiel",
             desc: "Des espaces sécurisés et modulables pour stocker vos marchandises en toute sérénité.",
-            price: "6€",
+            price: "4€",
+            refPrice: "6€",
             unit: "/ m³",
             period: "par mois",
             href: "/reserver?service=stockage_materiel",
@@ -508,6 +509,7 @@ const [menuOpen, setMenuOpen] = useState(false);
             title: "Parking poids lourds sécurisé",
             desc: "Un parking sécurisé 24/7 avec accès contrôlé et services dédiés aux chauffeurs.",
             price: "15€",
+            refPrice: "18€",
             unit: "/ nuit",
             period: "par nuit",
             href: "/reserver?service=parking_pl",
@@ -542,6 +544,7 @@ const [menuOpen, setMenuOpen] = useState(false);
             title: "Location de boxes & ateliers",
             desc: "Des boxes et ateliers flexibles pour entrepreneurs, artisans et entreprises en quête d’espace.",
             price: "350€",
+            refPrice: "650€",
             unit: "/ mois",
             period: "à partir de",
             href: "/reserver?service=atelier",
@@ -587,7 +590,16 @@ const [menuOpen, setMenuOpen] = useState(false);
     <div className="my-7 h-px w-full bg-zinc-200" />
 
     <div className="mt-auto">
-      <div className="flex items-end gap-2">
+      {service.refPrice && (
+        <p className="mb-2 text-[12px] font-semibold text-zinc-400">
+          <span className="sr-only">Tarif de référence : </span>
+          <span className="line-through decoration-zinc-400/80 decoration-1">
+            {service.refPrice} {service.unit}
+          </span>
+          <span aria-hidden="true">*</span>
+        </p>
+      )}
+      <div className="flex flex-wrap items-end gap-x-2 gap-y-1">
         <span className="text-[44px] font-black leading-none tracking-[-0.06em] text-red-600">
           {service.price}
         </span>
@@ -604,6 +616,9 @@ const [menuOpen, setMenuOpen] = useState(false);
 </Link>
         ))}
       </div>
+      <p className="mt-4 text-[11px] leading-5 tracking-[0.02em] text-zinc-500 lg:col-start-2">
+        * Tarifs de lancement valables jusqu’au 31 décembre 2026. Prix barrés : tarifs de référence.
+      </p>
     </div>
 
     {/* Secondary services */}

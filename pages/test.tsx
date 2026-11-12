@@ -175,7 +175,7 @@ export default function SedxHome() {
       `Message : ${message || "Non renseigné"}`,
     ];
 
-    const phoneNumber = "352691280494";
+    const phoneNumber = "33743741575";
     const text = encodeURIComponent(lines.join("\n"));
 
     window.open(`https://wa.me/${phoneNumber}?text=${text}`, "_blank");
